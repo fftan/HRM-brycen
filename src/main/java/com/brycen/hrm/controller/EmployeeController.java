@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.Employee;
+import com.brycen.hrm.model.object.EmployeeSkillObject;
 import com.brycen.hrm.service.EmployeeService;
 
 @CrossOrigin
@@ -51,32 +52,33 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/employees/create")
-	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp, UriComponentsBuilder builder) {
-		empService.save(emp);
+	public ResponseEntity<EmployeeSkillObject> createEmployee(@RequestBody EmployeeSkillObject empSkillObj, UriComponentsBuilder builder) {
+		
+			empService.save(empSkillObj);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/employees/{id}").buildAndExpand(emp.getId()).toUri());
-		return new ResponseEntity<>(emp, HttpStatus.CREATED);
+		headers.setLocation(builder.path("/employees/{id}").buildAndExpand(empSkillObj.emp.getId()).toUri());
+		return new ResponseEntity<>(empSkillObj, HttpStatus.CREATED);
 	}
 
-	@PutMapping(value = "/employees/{id}")
-	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") int id, @RequestBody Employee emp) {
-		Optional<Employee> currentEmployee = empService.findById(id);
-		if (!currentEmployee.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		currentEmployee.get().setFull_name(emp.getFull_name());
-		currentEmployee.get().setUsername(emp.getUsername());
-		currentEmployee.get().setBirthday(emp.getBirthday());
-		currentEmployee.get().setId_card(emp.getId_card());
-		currentEmployee.get().setGender(emp.isGender());
-		currentEmployee.get().setPhone(emp.getPhone());
-		currentEmployee.get().setEmail(emp.getEmail());
-		currentEmployee.get().setPosition(emp.getPosition());
-		currentEmployee.get().setStatus(emp.getStatus());
-		currentEmployee.get().setDepartment(emp.getDepartment());
-		currentEmployee.get().setRole(emp.getRole());
-
-		empService.save(currentEmployee.get());
-		return new ResponseEntity<>(currentEmployee.get(), HttpStatus.OK);
-	}
+//	@PutMapping(value = "/employees/{id}")
+//	public ResponseEntity<EmployeeSkillObject> updateEmployee(@PathVariable("id") int id, @RequestBody EmployeeSkillObject empSkillObj) {
+//		Optional<Employee> currentEmployee = empService.findById(id);
+//		if (!currentEmployee.isPresent()) {
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//		}
+//		currentEmployee.get().setFull_name(empSkillObj.emp.getFull_name());
+//		currentEmployee.get().setUsername(empSkillObj.emp.getUsername());
+//		currentEmployee.get().setBirthday(empSkillObj.emp.getBirthday());
+//		currentEmployee.get().setId_card(empSkillObj.emp.getId_card());
+//		currentEmployee.get().setGender(empSkillObj.emp.isGender());
+//		currentEmployee.get().setPhone(empSkillObj.emp.getPhone());
+//		currentEmployee.get().setEmail(empSkillObj.emp.getEmail());
+//		currentEmployee.get().setPosition(empSkillObj.emp.getPosition());
+//		currentEmployee.get().setStatus(empSkillObj.emp.getStatus());
+//		currentEmployee.get().setDepartment(empSkillObj.emp.getDepartment());
+//		currentEmployee.get().setRole(empSkillObj.emp.getRole());
+//		
+//		empService.save(empSkillObj);
+//		return new ResponseEntity<>(currentEmployee.get(), HttpStatus.OK);
+//	}
 }
