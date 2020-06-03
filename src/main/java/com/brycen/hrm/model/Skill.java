@@ -22,9 +22,8 @@ public class Skill implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private String level;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "skill-empSkill")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<EmployeeSkill> employee_skill;
 
@@ -42,14 +41,6 @@ public class Skill implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
 	}
 
 	public List<EmployeeSkill> getEmployee_skill() {

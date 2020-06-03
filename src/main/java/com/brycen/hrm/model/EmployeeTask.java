@@ -21,12 +21,12 @@ public class EmployeeTask implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "employee-task")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "task-empTask")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "task_id")
 	private Task task;

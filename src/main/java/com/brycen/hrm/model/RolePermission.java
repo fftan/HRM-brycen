@@ -21,12 +21,12 @@ public class RolePermission implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "role-rolePer")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "permission-rolePer")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "permission_id")
 	private Permission permission;

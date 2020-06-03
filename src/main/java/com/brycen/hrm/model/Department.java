@@ -32,7 +32,7 @@ public class Department implements Serializable {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date create_date;
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "department-employee")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "department")
 	private List<Employee> employee;
 

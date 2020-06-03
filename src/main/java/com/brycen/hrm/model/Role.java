@@ -23,11 +23,11 @@ public class Role implements Serializable{
 	private int id;
 	private String name;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "role-employee")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
 	private List<Employee> employee_role;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "role-rolePer")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
 	private List<RolePermission> role_permission;
 

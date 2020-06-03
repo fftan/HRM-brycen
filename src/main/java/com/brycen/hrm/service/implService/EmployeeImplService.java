@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Employee;
 import com.brycen.hrm.repository.EmployeeRepository;
+import com.brycen.hrm.repository.EmployeeSkillRepository;
 import com.brycen.hrm.service.EmployeeService;
 
 
@@ -16,7 +17,7 @@ public class EmployeeImplService implements EmployeeService{
 	private EmployeeRepository empRep;
 	
 	@Autowired
-	public EmployeeImplService (EmployeeRepository empRep) {
+	public EmployeeImplService(EmployeeRepository empRep, EmployeeSkillRepository empSkillRep) {
 		this.empRep = empRep;
 	}
 	
@@ -24,7 +25,7 @@ public class EmployeeImplService implements EmployeeService{
 	public List<Employee> findAllEmployees() {
 		return (List<Employee>) empRep.findAll(); 
 	}
-	
+
 	@Override
 	public Optional<Employee> findById(int id) {
 		return empRep.findById(id);

@@ -38,7 +38,7 @@ public class Task implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date create_date;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "task-empTask")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "task")
 	private List<EmployeeTask> employee_task;
 

@@ -25,7 +25,7 @@ public class Permission implements Serializable{
 	private int level;
 	private String description;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "permission-rolePer")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "permission")
 	private List<RolePermission> role_permission;
 

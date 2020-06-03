@@ -10,7 +10,7 @@ public interface EmployeeService {
 	
 	Optional<Employee> findById(int id);
 	
-	void save(Employee emp);
+	void save(Employee empempSkill);
 	
 	void remove(Employee emp);
 }

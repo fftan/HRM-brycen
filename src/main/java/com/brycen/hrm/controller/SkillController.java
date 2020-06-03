@@ -63,7 +63,6 @@ public class SkillController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		currentSkill.get().setName(skill.getName());
-		currentSkill.get().setLevel(skill.getLevel());
 		skillService.save(currentSkill.get());
 		return new ResponseEntity<Skill>(currentSkill.get(), HttpStatus.OK);
 	}

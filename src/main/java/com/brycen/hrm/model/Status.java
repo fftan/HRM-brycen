@@ -29,7 +29,7 @@ public class Status implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date change_date;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "status-employee")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "status")
 	private List<Employee> employee_task;
 

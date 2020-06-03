@@ -20,13 +20,14 @@ public class EmployeeSkill implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private int level;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "skill-empSkill")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "employee-skill")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
@@ -37,6 +38,14 @@ public class EmployeeSkill implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public Skill getSkill() {

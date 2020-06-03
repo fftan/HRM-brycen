@@ -36,26 +36,26 @@ public class Employee implements Serializable {
 	private String email;
 	private String position;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "department-employee")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="department_id")
 	private Department department;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "status-employee")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "role-employee")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "employee-skill")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeSkill> employee_skill;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "employee-task")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeTask> employee_task;
 
