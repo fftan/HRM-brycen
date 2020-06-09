@@ -15,7 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "department")
@@ -28,18 +29,12 @@ public class Department implements Serializable {
 
 	private boolean active;
 	private int persion_id;
-	
+
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date create_date;
 
-	@JsonManagedReference(value = "department-employee")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "department")
 	private List<Employee> employee;
-
-	public Department() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getId() {
 		return id;
@@ -81,6 +76,7 @@ public class Department implements Serializable {
 		this.create_date = create_date;
 	}
 
+	@JsonIgnore
 	public List<Employee> getEmployee() {
 		return employee;
 	}

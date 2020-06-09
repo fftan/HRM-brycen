@@ -11,25 +11,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@JsonIdentityInfo(scope = RolePermission.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
-@Table(name="role_permission")
-public class RolePermission implements Serializable{
+@Table(name = "employee")
+public class EmployeeRole implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "permission_id")
-	private Permission permission;
 
 	public int getId() {
 		return id;
@@ -39,19 +38,19 @@ public class RolePermission implements Serializable{
 		this.id = id;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public Permission getPermission() {
-		return permission;
-	}
-
-	public void setPermission(Permission permission) {
-		this.permission = permission;
 	}
 }

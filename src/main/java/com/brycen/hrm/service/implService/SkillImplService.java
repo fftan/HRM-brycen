@@ -1,9 +1,10 @@
 package com.brycen.hrm.service.implService;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Skill;
@@ -20,8 +21,8 @@ public class SkillImplService implements SkillService {
 	}
 
 	@Override
-	public List<Skill> findAllSkill() {
-		return (List<Skill>) skillRep.findAll();
+	public Page<Skill> findAllSkill(Pageable pageable) {
+		return skillRep.findAll(pageable);
 	}
 
 	@Override

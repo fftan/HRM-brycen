@@ -15,9 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "employee")
 public class Employee implements Serializable {
@@ -35,27 +32,21 @@ public class Employee implements Serializable {
 	private String phone;
 	private String email;
 	private String position;
-	
-	@JsonBackReference(value = "department-employee")
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="department_id")
+	@JoinColumn(name = "department_id")
 	private Department department;
 	
-	@JsonBackReference(value = "status-employee")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
-	@JsonBackReference(value = "role-employee")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id")
-	private Role role;
-	
-	@JsonManagedReference(value = "employee-skill")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
+	private List<EmployeeRole> employee_role;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeSkill> employee_skill;
-	
-	@JsonManagedReference(value = "employee-task")
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeTask> employee_task;
 
@@ -155,12 +146,12 @@ public class Employee implements Serializable {
 		this.status = status;
 	}
 
-	public Role getRole() {
-		return role;
+	public List<EmployeeRole> getEmployee_role() {
+		return employee_role;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setEmployee_role(List<EmployeeRole> employee_role) {
+		this.employee_role = employee_role;
 	}
 
 	public List<EmployeeSkill> getEmployee_skill() {

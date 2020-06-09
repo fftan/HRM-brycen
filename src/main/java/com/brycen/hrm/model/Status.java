@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="status")
@@ -28,10 +28,10 @@ public class Status implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date change_date;
-	
-	@JsonManagedReference(value = "status-employee")
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "status")
-	private List<Employee> employee_task;
+	private List<Employee> employee;
 
 	public int getId() {
 		return id;
@@ -57,11 +57,12 @@ public class Status implements Serializable {
 		this.change_date = change_date;
 	}
 
-	public List<Employee> getEmployee_task() {
-		return employee_task;
+	@JsonIgnore
+	public List<Employee> getEmployee() {
+		return employee;
 	}
 
-	public void setEmployee_task(List<Employee> employee_task) {
-		this.employee_task = employee_task;
+	public void setEmployee(List<Employee> employee) {
+		this.employee = employee;
 	}
 }

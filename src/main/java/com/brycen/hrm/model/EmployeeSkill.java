@@ -11,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "employee_skill")
@@ -21,13 +23,12 @@ public class EmployeeSkill implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int level;
-	
-	@JsonBackReference(value = "skill-empSkill")
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
-	
-	@JsonBackReference(value = "employee-skill")
+
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;

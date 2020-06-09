@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(scope = Permission.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="permission")
 public class Permission implements Serializable{
@@ -25,7 +27,6 @@ public class Permission implements Serializable{
 	private int level;
 	private String description;
 	
-	@JsonManagedReference(value = "permission-rolePer")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "permission")
 	private List<RolePermission> role_permission;
 

@@ -15,8 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(scope = Task.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="task")
 public class Task implements Serializable {
@@ -38,7 +40,6 @@ public class Task implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date create_date;
 	
-	@JsonManagedReference(value = "task-empTask")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "task")
 	private List<EmployeeTask> employee_task;
 

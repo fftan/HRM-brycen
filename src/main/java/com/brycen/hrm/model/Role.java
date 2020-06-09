@@ -12,24 +12,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "role")
-public class Role implements Serializable{
+public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	
-	@JsonManagedReference(value = "role-employee")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
-	private List<Employee> employee_role;
-	
-	@JsonManagedReference(value = "role-rolePer")
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
 	private List<RolePermission> role_permission;
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
+	private List<EmployeeRole> role_employee;
 
 	public int getId() {
 		return id;
@@ -47,19 +49,20 @@ public class Role implements Serializable{
 		this.name = name;
 	}
 
-	public List<Employee> getEmployee_role() {
-		return employee_role;
-	}
-
-	public void setEmployee_role(List<Employee> employee_role) {
-		this.employee_role = employee_role;
-	}
-
 	public List<RolePermission> getRole_permission() {
 		return role_permission;
 	}
 
 	public void setRole_permission(List<RolePermission> role_permission) {
 		this.role_permission = role_permission;
+	}
+
+	@JsonIgnore
+	public List<EmployeeRole> getRole_employee() {
+		return role_employee;
+	}
+
+	public void setRole_employee(List<EmployeeRole> role_employee) {
+		this.role_employee = role_employee;
 	}
 }
