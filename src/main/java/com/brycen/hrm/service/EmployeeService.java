@@ -9,10 +9,10 @@ import com.brycen.hrm.model.Employee;
 
 public interface EmployeeService {
 	Page<Employee> findAllEmployees(Pageable pageable);
-	
+
 	Optional<Employee> findById(int id);
-	
+
 	void save(Employee emp);
-	
+
 	void remove(Employee emp);
 }

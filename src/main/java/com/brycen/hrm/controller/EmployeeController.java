@@ -59,11 +59,10 @@ public class EmployeeController {
 
 	@PostMapping(value = "/employees/create")
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp, UriComponentsBuilder builder) {
-
 		empService.save(emp);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(builder.path("/employees/{id}").buildAndExpand(emp.getId()).toUri());
-		return new ResponseEntity<>(emp, HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 //	@PutMapping(value = "/employees/{id}")
