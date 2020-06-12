@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.Employee;
+import com.brycen.hrm.model.request.CreateEmployeeRequest;
 import com.brycen.hrm.model.response.EmployeeResponse;
 import com.brycen.hrm.service.EmployeeService;
 
@@ -38,14 +39,13 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employees")
-	public Page<EmployeeResponse> getAll(@RequestParam(name = "page", defaultValue = "0") int page,
+	public Page<EmployeeResponse> getAll(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size) {
-		PageRequest pageRequest = PageRequest.of(page, size);
+		PageRequest pageRequest = PageRequest.of(page - 1, size);
 		Page<Employee> pageResult = empService.findAllEmployees(pageRequest);
 
 		List<EmployeeResponse> employees = pageResult.stream().map(EmployeeResponse::new).collect(Collectors.toList());
 		return new PageImpl<>(employees, pageRequest, pageResult.getTotalElements());
-
 	}
 
 	@GetMapping(value = "/employees/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,11 +58,9 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/employees/create")
-	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp, UriComponentsBuilder builder) {
-		empService.save(emp);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("/employees/{id}").buildAndExpand(emp.getId()).toUri());
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<CreateEmployeeRequest> createEmployee(@RequestBody CreateEmployeeRequest empRequest) {
+		empService.save(empRequest);
+		return new ResponseEntity<>(empRequest, HttpStatus.CREATED);
 	}
 
 //	@PutMapping(value = "/employees/{id}")
