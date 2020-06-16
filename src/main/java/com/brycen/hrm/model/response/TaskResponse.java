@@ -1,50 +1,42 @@
-package com.brycen.hrm.model;
+package com.brycen.hrm.model.response;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.brycen.hrm.model.Task;
 
-@JsonIdentityInfo(scope = Task.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Entity
-@Table(name = "task")
-public class Task implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TaskResponse {
 	private int id;
 	private String name;
 	private boolean offshore;
 	private boolean product;
 	private String description;
 	private String estimate;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start_date;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end_date;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date create_date;
+	
+	
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "task")
-	private List<EmployeeTask> employee_task;
-
-	public Task() {
+	public TaskResponse(Task task) {
+		super();
+		this.id = task.getId();
+		this.name = task.getName();
+		this.offshore = task.isOffshore();
+		this.product = task.isProduct();
+		this.description = task.getDescription();
+		this.estimate = task.getEstimate();
+		this.start_date = task.getStart_date();
+		this.end_date = task.getEnd_date();
+		this.create_date = task.getCreate_date();
 	}
 
 	public int getId() {
@@ -117,13 +109,5 @@ public class Task implements Serializable {
 
 	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
-	}
-
-	public List<EmployeeTask> getEmployee_task() {
-		return employee_task;
-	}
-
-	public void setEmployee_task(List<EmployeeTask> employee_task) {
-		this.employee_task = employee_task;
 	}
 }

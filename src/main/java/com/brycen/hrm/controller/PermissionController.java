@@ -2,8 +2,12 @@ package com.brycen.hrm.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.Permission;
+import com.brycen.hrm.model.response.PermissionResponse;
 import com.brycen.hrm.service.PermissionService;
 
 @CrossOrigin
@@ -30,12 +36,11 @@ public class PermissionController {
 	}
 	
 	@GetMapping(value = "/permissions")
-	public ResponseEntity<List<Permission>> findAllPermission(){
-		List<Permission> permissions = perService.findAllPermission();
-		if (permissions.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(permissions, HttpStatus.OK);
+	public Page<PermissionResponse> findAllPermission(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "5") int size){
+		PageRequest pageRequest = PageRequest.of(page - 1, size);
+		Page<Permission> pageResult = perService.findAllPermission(pageRequest);
+		List<PermissionResponse> permissions = pageResult.stream().map(PermissionResponse::new).collect(Collectors.toList());
+		return new PageImpl<>(permissions, pageRequest, pageResult.getTotalElements());
 	}
 	
 	@GetMapping(value = "/permissions/{id}")
@@ -62,7 +67,6 @@ public class PermissionController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		currentPermission.get().setName(permission.getName());
-		currentPermission.get().setLevel(permission.getLevel());
 		currentPermission.get().setDescription(permission.getDescription());
 		perService.save(currentPermission.get());
 		return new ResponseEntity<>(currentPermission.get(), HttpStatus.OK);

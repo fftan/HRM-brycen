@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Department;
@@ -18,10 +20,10 @@ public class DepartmentImpService implements DepartmentService{
 	public DepartmentImpService(DepartmentRepository depRep) {
 		this.depRep = depRep;
 	}
-
+	
 	@Override
-	public List<Department> findAllDepartments() {
-		return (List<Department>) depRep.findAll();
+	public Page<Department> findAllDepartments(Pageable pageable) {
+		return depRep.findAll(pageable);
 	}
 
 	@Override
@@ -39,5 +41,4 @@ public class DepartmentImpService implements DepartmentService{
 	public void remove(Department department) {
 		depRep.delete(department);
 	}
-
 }

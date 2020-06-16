@@ -1,12 +1,14 @@
 package com.brycen.hrm.service;
 
-import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.brycen.hrm.model.Permission;
 
 public interface PermissionService {
-	List<Permission> findAllPermission();
+	Page<Permission> findAllPermission(Pageable pageable);
 	
 	Optional<Permission> findPermissionById(int id);
 	

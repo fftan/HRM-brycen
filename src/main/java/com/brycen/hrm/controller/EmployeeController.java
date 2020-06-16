@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.Employee;
+import com.brycen.hrm.model.EmployeeRole;
 import com.brycen.hrm.model.request.CreateEmployeeRequest;
 import com.brycen.hrm.model.response.EmployeeResponse;
 import com.brycen.hrm.service.EmployeeService;
@@ -64,24 +65,25 @@ public class EmployeeController {
 	}
 
 //	@PutMapping(value = "/employees/{id}")
-//	public ResponseEntity<EmployeeSkillObject> updateEmployee(@PathVariable("id") int id, @RequestBody EmployeeSkillObject empSkillObj) {
+//	public ResponseEntity<CreateEmployeeRequest> updateEmployee(@PathVariable("id") int id, @RequestBody CreateEmployeeRequest empRequest) {
 //		Optional<Employee> currentEmployee = empService.findById(id);
+//		Optional<EmployeeRole> currentEmpRole = empService.fin
 //		if (!currentEmployee.isPresent()) {
 //			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //		}
-//		currentEmployee.get().setFull_name(empSkillObj.emp.getFull_name());
-//		currentEmployee.get().setUsername(empSkillObj.emp.getUsername());
-//		currentEmployee.get().setBirthday(empSkillObj.emp.getBirthday());
-//		currentEmployee.get().setId_card(empSkillObj.emp.getId_card());
-//		currentEmployee.get().setGender(empSkillObj.emp.isGender());
-//		currentEmployee.get().setPhone(empSkillObj.emp.getPhone());
-//		currentEmployee.get().setEmail(empSkillObj.emp.getEmail());
-//		currentEmployee.get().setPosition(empSkillObj.emp.getPosition());
-//		currentEmployee.get().setStatus(empSkillObj.emp.getStatus());
-//		currentEmployee.get().setDepartment(empSkillObj.emp.getDepartment());
-//		currentEmployee.get().setRole(empSkillObj.emp.getRole());
+//		currentEmployee.get().setFull_name(empRequest.emp.getFull_name());
+//		currentEmployee.get().setUsername(empRequest.emp.getUsername());
+//		currentEmployee.get().setBirthday(empRequest.emp.getBirthday());
+//		currentEmployee.get().setId_card(empRequest.emp.getId_card());
+//		currentEmployee.get().setGender(empRequest.emp.isGender());
+//		currentEmployee.get().setPhone(empRequest.emp.getPhone());
+//		currentEmployee.get().setEmail(empRequest.emp.getEmail());
+//		currentEmployee.get().setPosition(empRequest.emp.getPosition());
+//		currentEmployee.get().setAddress(empRequest.emp.getAddress());
+//		currentEmployee.get().setStatus(empRequest.emp.getStatus());
+//		currentEmployee.get().setDepartment(empRequest.emp.getDepartment());
 //		
-//		empService.save(empSkillObj);
-//		return new ResponseEntity<>(currentEmployee.get(), HttpStatus.OK);
+//		empService.save(empRequest);
+//		return new ResponseEntity<>(HttpStatus.OK);
 //	}
 }

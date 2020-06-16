@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.brycen.hrm.model.Employee;
+import com.brycen.hrm.model.EmployeeRole;
 import com.brycen.hrm.model.EmployeeSkill;
 
 public class EmployeeResponse {
@@ -18,6 +19,7 @@ public class EmployeeResponse {
 	private String status;
 	private String department;
 	private List<EmployeeSkill> employee_skill;
+	private List<EmployeeRole> employee_role;
 
 	public EmployeeResponse() {
 		super();
@@ -36,6 +38,7 @@ public class EmployeeResponse {
 		this.status = emp.getStatus().getName();
 		this.department = emp.getDepartment().getName();
 		this.employee_skill = emp.getEmployee_skill();
+		this.employee_role = emp.getEmployee_role();
 	}
 
 	public int getId() {
@@ -124,5 +127,13 @@ public class EmployeeResponse {
 
 	public void setEmployee_skill(List<EmployeeSkill> employee_skill) {
 		this.employee_skill = employee_skill;
+	}
+
+	public List<EmployeeRole> getEmployee_role() {
+		return employee_role;
+	}
+
+	public void setEmployee_role(List<EmployeeRole> employee_role) {
+		this.employee_role = employee_role;
 	}
 }

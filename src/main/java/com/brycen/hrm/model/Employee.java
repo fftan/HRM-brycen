@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "employee")
 public class Employee implements Serializable {
@@ -32,15 +36,17 @@ public class Employee implements Serializable {
 	private String phone;
 	private String email;
 	private String position;
+	private String address;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
 	private Department department;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "status_id")
 	private Status status;
-	
+
+	@JsonManagedReference(value = "emp_role")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeRole> employee_role;
 
@@ -128,6 +134,14 @@ public class Employee implements Serializable {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Department getDepartment() {

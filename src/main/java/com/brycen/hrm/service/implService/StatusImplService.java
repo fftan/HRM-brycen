@@ -1,9 +1,10 @@
 package com.brycen.hrm.service.implService;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Status;
@@ -20,8 +21,8 @@ public class StatusImplService implements StatusService{
 	}
 
 	@Override
-	public List<Status> findAllStatus() {
-		return (List<Status>) statusRep.findAll();
+	public Page<Status> findAllStatus(Pageable pageable) {
+		return statusRep.findAll(pageable);
 	}
 
 	@Override

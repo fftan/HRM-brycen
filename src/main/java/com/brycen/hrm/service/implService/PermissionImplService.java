@@ -1,9 +1,10 @@
 package com.brycen.hrm.service.implService;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Permission;
@@ -20,9 +21,8 @@ public class PermissionImplService implements PermissionService{
 	}
 
 	@Override
-	public List<Permission> findAllPermission() {
-		List<Permission> perList = (List<Permission>) perRep.findAll();
-		return perList;
+	public Page<Permission> findAllPermission(Pageable pageable) {
+		return perRep.findAll(pageable);
 	}
 
 	@Override

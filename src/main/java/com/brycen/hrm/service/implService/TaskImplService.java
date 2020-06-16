@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.Task;
@@ -20,8 +22,8 @@ public class TaskImplService implements TaskService{
 	}
 
 	@Override
-	public List<Task> findAllTasks() {
-		return (List<Task>) taskRep.findAll();
+	public Page<Task> findAllTasks(Pageable pageable) {
+		return taskRep.findAll(pageable);
 	}
 
 	@Override
@@ -37,6 +39,12 @@ public class TaskImplService implements TaskService{
 	@Override
 	public void remove(Task task) {
 		taskRep.delete(task);
+	}
+
+//	Dashboard
+	@Override
+	public List<Task> findAllTasks() {
+		return (List<Task>) taskRep.findAll();
 	}
 
 }
