@@ -11,9 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "employee_skill")
@@ -22,7 +21,6 @@ public class EmployeeSkill implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int level;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_id")
@@ -32,6 +30,11 @@ public class EmployeeSkill implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+	
+	@JsonBackReference(value = "empSkill_level")
+	@ManyToOne
+	@JoinColumn(name = "level_id")
+	private Level level;
 
 	public int getId() {
 		return id;
@@ -39,14 +42,6 @@ public class EmployeeSkill implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public Skill getSkill() {
@@ -63,5 +58,13 @@ public class EmployeeSkill implements Serializable {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 }

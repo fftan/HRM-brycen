@@ -69,8 +69,7 @@ public class TaskController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		currentTask.get().setName(task.getName());
-		currentTask.get().setOffshore(task.isOffshore());
-		currentTask.get().setProduct(task.isProduct());
+		currentTask.get().setType(task.getType());
 		taskService.save(currentTask.get());
 		return new ResponseEntity<>(currentTask.get(), HttpStatus.OK);
 	}

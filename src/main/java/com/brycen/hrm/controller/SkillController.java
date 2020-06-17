@@ -1,6 +1,5 @@
 package com.brycen.hrm.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,13 +37,22 @@ public class SkillController {
 	}
 
 	@GetMapping("/skills")
-	public Page<SkillResponse> getAll(@RequestParam(name = "page", defaultValue = "1") int page,
+	public Page<SkillResponse> getPage(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size) {
 		PageRequest pageRequest = PageRequest.of(page -1, size);
 		Page<Skill> pageResult = skillService.findAllSkill(pageRequest);
 
 		List<SkillResponse> skills = pageResult.stream().map(SkillResponse::new).collect(Collectors.toList());
 		return new PageImpl<>(skills, pageRequest, pageResult.getTotalElements());
+	}
+	
+	@GetMapping("/skill")
+	public ResponseEntity<List<Skill>> findAllSkill() {
+		List<Skill> skills = skillService.findAllSkill();
+		if(skills.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(skills, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/skills/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

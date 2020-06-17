@@ -5,13 +5,12 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.brycen.hrm.model.ProjectType;
 import com.brycen.hrm.model.Task;
 
 public class TaskResponse {
 	private int id;
 	private String name;
-	private boolean offshore;
-	private boolean product;
 	private String description;
 	private String estimate;
 	
@@ -24,19 +23,20 @@ public class TaskResponse {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date create_date;
 	
+	private ProjectType type;
+	
 	
 
 	public TaskResponse(Task task) {
 		super();
 		this.id = task.getId();
 		this.name = task.getName();
-		this.offshore = task.isOffshore();
-		this.product = task.isProduct();
 		this.description = task.getDescription();
 		this.estimate = task.getEstimate();
 		this.start_date = task.getStart_date();
 		this.end_date = task.getEnd_date();
 		this.create_date = task.getCreate_date();
+		this.type = task.getType();
 	}
 
 	public int getId() {
@@ -53,22 +53,6 @@ public class TaskResponse {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isOffshore() {
-		return offshore;
-	}
-
-	public void setOffshore(boolean offshore) {
-		this.offshore = offshore;
-	}
-
-	public boolean isProduct() {
-		return product;
-	}
-
-	public void setProduct(boolean product) {
-		this.product = product;
 	}
 
 	public String getDescription() {
@@ -109,5 +93,13 @@ public class TaskResponse {
 
 	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
+	}
+
+	public ProjectType getType() {
+		return type;
+	}
+
+	public void setType(ProjectType type) {
+		this.type = type;
 	}
 }

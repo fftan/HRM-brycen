@@ -1,5 +1,6 @@
 package com.brycen.hrm.service.implService;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class SkillImplService implements SkillService {
 	@Override
 	public void remove(Skill skill) {
 		skillRep.delete(skill);
+	}
+
+	@Override
+	public List<Skill> findAllSkill() {
+		return (List<Skill>) skillRep.findAll();
 	}
 
 }
