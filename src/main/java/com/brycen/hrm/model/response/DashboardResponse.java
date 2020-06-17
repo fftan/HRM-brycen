@@ -2,8 +2,8 @@ package com.brycen.hrm.model.response;
 
 import java.util.List;
 
-import com.brycen.hrm.model.Employee;
-import com.brycen.hrm.model.Task;
+import com.brycen.hrm.model.empTask.Task;
+import com.brycen.hrm.model.employee.Employee;
 
 public class DashboardResponse {
 	private List<Task> task;

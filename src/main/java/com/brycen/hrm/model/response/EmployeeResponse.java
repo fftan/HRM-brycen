@@ -3,9 +3,9 @@ package com.brycen.hrm.model.response;
 import java.sql.Date;
 import java.util.List;
 
-import com.brycen.hrm.model.Employee;
-import com.brycen.hrm.model.EmployeeRole;
-import com.brycen.hrm.model.EmployeeSkill;
+import com.brycen.hrm.model.empRole.EmployeeRole;
+import com.brycen.hrm.model.empSkill.EmployeeSkill;
+import com.brycen.hrm.model.employee.Employee;
 
 public class EmployeeResponse {
 	private int id;

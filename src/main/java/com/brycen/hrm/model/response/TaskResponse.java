@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.brycen.hrm.model.ProjectType;
-import com.brycen.hrm.model.Task;
+import com.brycen.hrm.model.empTask.ProjectType;
+import com.brycen.hrm.model.empTask.Task;
 
 public class TaskResponse {
 	private int id;

@@ -7,8 +7,8 @@ import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.brycen.hrm.model.Department;
-import com.brycen.hrm.model.Employee;
+import com.brycen.hrm.model.department.Department;
+import com.brycen.hrm.model.employee.Employee;
 
 public class DepartmentResponse {
 	private int id;

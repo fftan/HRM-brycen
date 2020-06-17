@@ -1,6 +1,6 @@
 package com.brycen.hrm.model.response;
 
-import com.brycen.hrm.model.ProjectType;
+import com.brycen.hrm.model.empTask.ProjectType;
 
 public class ProjectTypeResponse {
 	private int id;

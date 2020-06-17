@@ -1,6 +1,6 @@
 package com.brycen.hrm.model.response;
 
-import com.brycen.hrm.model.Permission;
+import com.brycen.hrm.model.empRole.Permission;
 
 public class PermissionResponse {
 	private int id;

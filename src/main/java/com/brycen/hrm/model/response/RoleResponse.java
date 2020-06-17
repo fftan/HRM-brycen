@@ -1,6 +1,6 @@
 package com.brycen.hrm.model.response;
 
-import com.brycen.hrm.model.Role;
+import com.brycen.hrm.model.empRole.Role;
 
 public class RoleResponse {
 	private int id;

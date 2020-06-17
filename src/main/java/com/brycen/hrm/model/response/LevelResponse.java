@@ -1,6 +1,6 @@
 package com.brycen.hrm.model.response;
 
-import com.brycen.hrm.model.Level;
+import com.brycen.hrm.model.employee.Level;
 
 public class LevelResponse {
 	private int id;

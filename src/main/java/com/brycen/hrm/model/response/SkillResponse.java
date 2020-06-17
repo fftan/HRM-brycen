@@ -2,8 +2,8 @@ package com.brycen.hrm.model.response;
 
 import java.util.List;
 
-import com.brycen.hrm.model.EmployeeSkill;
-import com.brycen.hrm.model.Skill;
+import com.brycen.hrm.model.empSkill.EmployeeSkill;
+import com.brycen.hrm.model.empSkill.Skill;
 
 public class SkillResponse {
 	private int id;

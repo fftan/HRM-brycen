@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.brycen.hrm.model.Status;
+import com.brycen.hrm.model.employee.Status;
 
 public class StatusResponse {
 	private int id;
