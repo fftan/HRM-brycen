@@ -47,7 +47,7 @@ public class DepartmentController {
 		return new PageImpl<>(employees, pageRequest, pageResult.getTotalElements());
 	}
 
-	@GetMapping(value = "/department-list")
+	@GetMapping(value = "/departments/list")
 	public ResponseEntity<List<Department>> listAll() {
 		List<Department> departments = depService.listAll();
 		if (departments.isEmpty()) {

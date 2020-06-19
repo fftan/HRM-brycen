@@ -45,7 +45,7 @@ public class RoleController {
 		return new PageImpl<>(roles, pageRequest, pageResult.getTotalElements());
 	}
 	
-	@GetMapping(value = "/role-list")
+	@GetMapping(value = "/roles/list")
 	public ResponseEntity<List<Role>> listAll() {
 		List<Role> roles = roleService.listAll();
 		if (roles.isEmpty()) {

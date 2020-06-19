@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.empSkill.EmployeeSkill;
+import com.brycen.hrm.model.request.EmployeeSkillRequest;
 import com.brycen.hrm.repository.empSkill.EmployeeSkillRepository;
 import com.brycen.hrm.service.empSkill.EmployeeSkillService;
 
 @Service
-public class EmployeeSkillImplService implements EmployeeSkillService{
+public class EmployeeSkillImplService implements EmployeeSkillService {
 	private EmployeeSkillRepository empSkillRep;
 
 	@Autowired
@@ -32,8 +33,11 @@ public class EmployeeSkillImplService implements EmployeeSkillService{
 	}
 
 	@Override
-	public void save(EmployeeSkill empSkill) {
-		empSkillRep.save(empSkill);
+	public void save(List<EmployeeSkillRequest> empSkill) {
+		System.out.print(empSkill.get(0).toString());
+		for (int i = 0; i < empSkill.size(); i++) {
+//			empSkillRep.save(empSkill.get(i));
+		}
 	}
 
 	@Override

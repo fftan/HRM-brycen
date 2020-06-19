@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.empRole.Role;
@@ -21,11 +22,13 @@ public class RoleImplService implements RoleService{
 		this.roleRep = roleRep;
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@Override
 	public Page<Role> findAllRole(Pageable pageable) {
 		return roleRep.findAll(pageable);
 	}
 
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
 	@Override
 	public Optional<Role> findRoleById(int id) {
 		Optional<Role> role = roleRep.findById(id);

@@ -31,7 +31,7 @@ public class ProjectTypeController {
 		this.projectService = projectService;
 	}
 
-	@GetMapping("/project-types")
+	@GetMapping("/project-types/list")
 	public ResponseEntity<List<ProjectType>> findAll() {
 		List<ProjectType> types = projectService.findAll();
 		if (types.isEmpty()) {
@@ -40,7 +40,7 @@ public class ProjectTypeController {
 		return new ResponseEntity<>(types, HttpStatus.OK);
 	}
 	
-	@GetMapping("/project-type")
+	@GetMapping("/project-types")
 	public Page<ProjectTypeResponse> getPage(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size) {
 		PageRequest pageRequest = PageRequest.of(page -1, size);

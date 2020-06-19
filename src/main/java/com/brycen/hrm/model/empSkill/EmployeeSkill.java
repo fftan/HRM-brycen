@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import com.brycen.hrm.model.employee.Employee;
 import com.brycen.hrm.model.employee.Level;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "employee_skill")
 public class EmployeeSkill implements Serializable {
@@ -28,7 +26,7 @@ public class EmployeeSkill implements Serializable {
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
 
-	@JsonIgnore
+	@JsonBackReference(value = "empSkill_emp")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;

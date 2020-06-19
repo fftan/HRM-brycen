@@ -67,7 +67,6 @@ public class EmployeeController {
 //	@PutMapping(value = "/employees/{id}")
 //	public ResponseEntity<CreateEmployeeRequest> updateEmployee(@PathVariable("id") int id, @RequestBody CreateEmployeeRequest empRequest) {
 //		Optional<Employee> currentEmployee = empService.findById(id);
-//		Optional<EmployeeRole> currentEmpRole = empService.fin
 //		if (!currentEmployee.isPresent()) {
 //			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //		}

@@ -52,6 +52,7 @@ public class Employee implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeRole> employee_role;
 
+	@JsonManagedReference(value = "empSkill_emp")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
 	private List<EmployeeSkill> employee_skill;
 

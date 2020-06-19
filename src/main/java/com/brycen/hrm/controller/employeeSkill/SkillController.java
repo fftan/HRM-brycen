@@ -46,7 +46,7 @@ public class SkillController {
 		return new PageImpl<>(skills, pageRequest, pageResult.getTotalElements());
 	}
 	
-	@GetMapping("/skill")
+	@GetMapping("/skills/list")
 	public ResponseEntity<List<Skill>> findAllSkill() {
 		List<Skill> skills = skillService.findAllSkill();
 		if(skills.isEmpty()) {

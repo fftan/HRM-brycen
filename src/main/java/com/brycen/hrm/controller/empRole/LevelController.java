@@ -31,7 +31,7 @@ public class LevelController {
 		this.levelService = levelService;
 	}
 
-	@GetMapping("/levels")
+	@GetMapping("/levels/list")
 	public ResponseEntity<List<Level>> findAll() {
 		List<Level> levels = levelService.findAllLevel();
 		if (levels.isEmpty()) {
@@ -40,7 +40,7 @@ public class LevelController {
 		return new ResponseEntity<>(levels, HttpStatus.OK);
 	}
 	
-	@GetMapping("/level")
+	@GetMapping("/levels")
 	public Page<LevelResponse> getPage(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size) {
 		PageRequest pageRequest = PageRequest.of(page -1, size);

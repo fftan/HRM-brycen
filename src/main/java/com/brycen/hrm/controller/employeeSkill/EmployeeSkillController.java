@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.empSkill.EmployeeSkill;
+import com.brycen.hrm.model.request.EmployeeSkillRequest;
 import com.brycen.hrm.service.empSkill.EmployeeSkillService;
 
 @CrossOrigin
@@ -48,10 +49,8 @@ public class EmployeeSkillController {
 	}
 	
 	@PostMapping(value = "/employee-skill/create")
-	public ResponseEntity<EmployeeSkill> createNew(@RequestBody EmployeeSkill empSkill, UriComponentsBuilder builder){
+	public ResponseEntity<?> createNew(@RequestBody List<EmployeeSkillRequest> empSkill){
 		empSkillSerivce.save(empSkill);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(builder.path("employee-skill/{id}").buildAndExpand(empSkill.getId()).toUri());
-		return new ResponseEntity<EmployeeSkill>(empSkill, HttpStatus.CREATED);
+		return new ResponseEntity<EmployeeSkill>(HttpStatus.CREATED);
 	}
 }

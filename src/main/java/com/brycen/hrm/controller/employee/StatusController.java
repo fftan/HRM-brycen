@@ -44,7 +44,7 @@ public class StatusController {
 		return new PageImpl<>(status, pageRequest, pageResult.getTotalElements());
 	}
 	
-	@GetMapping(value = "/status-list")
+	@GetMapping(value = "/status/list")
 	public ResponseEntity<List<Status>> listAll() {
 		List<Status> status = statusService.listAll();
 		if (status.isEmpty()) {
