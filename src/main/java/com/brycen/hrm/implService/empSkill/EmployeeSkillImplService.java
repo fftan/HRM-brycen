@@ -33,10 +33,19 @@ public class EmployeeSkillImplService implements EmployeeSkillService {
 	}
 
 	@Override
-	public void save(List<EmployeeSkillRequest> empSkill) {
-		System.out.print(empSkill.get(0).toString());
-		for (int i = 0; i < empSkill.size(); i++) {
-//			empSkillRep.save(empSkill.get(i));
+	public Optional<EmployeeSkill> findByEmployeeId(int id) {
+		Optional<EmployeeSkill> empSkill = empSkillRep.findByEmployeeId(id);
+		return empSkill;
+	}
+
+	@Override
+	public void save(EmployeeSkillRequest empSkills) {
+//		Optional<EmployeeSkill> empSkillRequest = empSkillRep.findByEmployeeId(empSkills.empSkill.get(0).getEmployee().getId());
+//		for(int i=0; i<empSkillRequest.get().getEmployee().getId())
+//		empSkillRep.deleteById(empSkillRequest.get().getId());
+		for (int i = 0; i < empSkills.empSkill.size(); i++) {
+			var empSkill = empSkills.empSkill.get(i);
+			empSkillRep.save(empSkill);
 		}
 	}
 

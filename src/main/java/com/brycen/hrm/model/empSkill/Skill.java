@@ -12,9 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "skill")
@@ -25,7 +23,7 @@ public class Skill implements Serializable {
 	private int id;
 	private String name;
 
-	@JsonIgnore
+	@JsonManagedReference(value = "empSkill_skill")
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "skill")
 	private List<EmployeeSkill> employee_skill;
 

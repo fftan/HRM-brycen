@@ -22,6 +22,7 @@ public class EmployeeSkill implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@JsonBackReference(value = "empSkill_skill")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_id")
 	private Skill skill;
