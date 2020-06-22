@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.brycen.hrm.model.empTask.Task;
-import com.brycen.hrm.model.request.TaskRequest;
 import com.brycen.hrm.repository.empTask.TaskRepository;
 import com.brycen.hrm.service.empTask.TaskService;
 
@@ -49,11 +48,5 @@ public class TaskImplService implements TaskService {
 	@Override
 	public List<Task> findAllTasks() {
 		return (List<Task>) taskRep.findAll();
-	}
-
-//	Search
-	@Override
-	public Page<Task> findAllByTypeId(int id, Pageable pageable) {
-		return null;
 	}
 }

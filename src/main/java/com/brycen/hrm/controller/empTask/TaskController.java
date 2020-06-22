@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.empTask.Task;
-import com.brycen.hrm.model.request.TaskRequest;
 import com.brycen.hrm.model.response.TaskResponse;
 import com.brycen.hrm.service.empTask.TaskService;
 

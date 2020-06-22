@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +19,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.brycen.hrm.model.empRole.EmployeeRole;
 import com.brycen.hrm.model.employee.Employee;
 import com.brycen.hrm.model.request.CreateEmployeeRequest;
+import com.brycen.hrm.model.request.EmployeeRequest;
 import com.brycen.hrm.model.response.EmployeeResponse;
 import com.brycen.hrm.service.employee.EmployeeService;
 
@@ -64,12 +62,12 @@ public class EmployeeController {
 		return new ResponseEntity<>(empRequest, HttpStatus.CREATED);
 	}
 
-//	@PutMapping(value = "/employees/{id}")
-//	public ResponseEntity<CreateEmployeeRequest> updateEmployee(@PathVariable("id") int id, @RequestBody CreateEmployeeRequest empRequest) {
-//		Optional<Employee> currentEmployee = empService.findById(id);
-//		if (!currentEmployee.isPresent()) {
-//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//		}
+	@PutMapping(value = "/employees/{id}")
+	public ResponseEntity<?> updateEmployee(@PathVariable("id") int id, @RequestBody EmployeeRequest empRequest) {
+		Optional<Employee> currentEmployee = empService.findById(id);
+		if (!currentEmployee.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 //		currentEmployee.get().setFull_name(empRequest.emp.getFull_name());
 //		currentEmployee.get().setUsername(empRequest.emp.getUsername());
 //		currentEmployee.get().setBirthday(empRequest.emp.getBirthday());
@@ -81,8 +79,8 @@ public class EmployeeController {
 //		currentEmployee.get().setAddress(empRequest.emp.getAddress());
 //		currentEmployee.get().setStatus(empRequest.emp.getStatus());
 //		currentEmployee.get().setDepartment(empRequest.emp.getDepartment());
-//		
-//		empService.save(empRequest);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+		
+		empService.update(id, empRequest);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }
