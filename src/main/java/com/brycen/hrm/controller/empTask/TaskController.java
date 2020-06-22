@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.brycen.hrm.model.empTask.Task;
+import com.brycen.hrm.model.request.TaskRequest;
 import com.brycen.hrm.model.response.TaskResponse;
 import com.brycen.hrm.service.empTask.TaskService;
 
@@ -36,36 +37,46 @@ public class TaskController {
 	public TaskController(TaskService taskService) {
 		this.taskService = taskService;
 	}
-	
+
 	@GetMapping(value = "/tasks")
-	public Page<TaskResponse> findAllTasks(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "5") int size){
+	public Page<TaskResponse> findAllTasks(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "size", defaultValue = "5") int size, @RequestParam(name = "type_id")  int id) {
 		PageRequest pageRequest = PageRequest.of(page - 1, size);
-		Page<Task> pageResult = taskService.findAllTasks(pageRequest);
+		Page<Task> pageResult = taskService.findAllTasks(pageRequest, id);
 		List<TaskResponse> tasks = pageResult.stream().map(TaskResponse::new).collect(Collectors.toList());
 		return new PageImpl<>(tasks, pageRequest, pageResult.getTotalElements());
 	}
-	
+
 	@GetMapping(value = "/tasks/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Task> findTaskById(@PathVariable("id") int id){
+	public ResponseEntity<Task> findTaskById(@PathVariable("id") int id) {
 		Optional<Task> task = taskService.findById(id);
-		if(!task.isPresent()) {
+		if (!task.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(task.get(), HttpStatus.OK);
 	}
-	
+
+//	@GetMapping(value = "/tasks/search/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public Page<TaskResponse> findAllTasks(@PathVariable("id") int id, 
+//			@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "5") int size){
+//		PageRequest pageRequest = PageRequest.of(page - 1, size);
+//		Page<Task> pageResult = taskService.findAllByTypeId(id, pageRequest);
+//		List<TaskResponse> tasks = pageResult.stream().map(TaskResponse::new).collect(Collectors.toList());
+//		return new PageImpl<>(tasks, pageRequest, pageResult.getTotalElements());
+//	}
+
 	@PostMapping(value = "/tasks/create")
-	public ResponseEntity<Task> createTask(@RequestBody Task task, UriComponentsBuilder builder){
+	public ResponseEntity<Task> createTask(@RequestBody Task task, UriComponentsBuilder builder) {
 		taskService.save(task);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(builder.path("/tasks/{id}").buildAndExpand(task.getId()).toUri());
 		return new ResponseEntity<>(task, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping(value = "/tasks/{id}")
-	public ResponseEntity<Task> updateTask(@PathVariable("id") int id, @RequestBody Task task){
+	public ResponseEntity<Task> updateTask(@PathVariable("id") int id, @RequestBody Task task) {
 		Optional<Task> currentTask = taskService.findById(id);
-		if(!currentTask.isPresent()) {
+		if (!currentTask.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		currentTask.get().setName(task.getName());
@@ -73,11 +84,11 @@ public class TaskController {
 		taskService.save(currentTask.get());
 		return new ResponseEntity<>(currentTask.get(), HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping(value = "/tasks/{id}")
-	public ResponseEntity<Task> deleteTask(@PathVariable("id") int id){
+	public ResponseEntity<Task> deleteTask(@PathVariable("id") int id) {
 		Optional<Task> task = taskService.findById(id);
-		if(!task.isPresent()) {
+		if (!task.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		taskService.remove(task.get());
