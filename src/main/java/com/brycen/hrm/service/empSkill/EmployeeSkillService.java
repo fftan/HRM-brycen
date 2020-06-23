@@ -14,6 +14,8 @@ public interface EmployeeSkillService {
 	Optional<EmployeeSkill> findByEmployeeId(int id);
 
 	void save(EmployeeSkillRequest empSkill);
+	
+	void update(EmployeeSkillRequest empSkillRequest);
 
 	void remove(EmployeeSkill empSkill);
 }

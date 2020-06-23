@@ -40,13 +40,16 @@ public class EmployeeSkillImplService implements EmployeeSkillService {
 
 	@Override
 	public void save(EmployeeSkillRequest empSkills) {
-//		Optional<EmployeeSkill> empSkillRequest = empSkillRep.findByEmployeeId(empSkills.empSkill.get(0).getEmployee().getId());
-//		for(int i=0; i<empSkillRequest.get().getEmployee().getId())
-//		empSkillRep.deleteById(empSkillRequest.get().getId());
 		for (int i = 0; i < empSkills.empSkill.size(); i++) {
 			var empSkill = empSkills.empSkill.get(i);
 			empSkillRep.save(empSkill);
 		}
+	}
+
+	@Override
+	public void update(EmployeeSkillRequest empSkillRequest) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
