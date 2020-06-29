@@ -61,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			
 			// Access by admin
 //			.antMatchers("/roles?page&name").hasAuthority("ADMIN")
-			.antMatchers("/employees/**").hasAuthority("ADMIN")
+			.antMatchers("/employees").hasAnyAuthority("ADMIN", "PM")
+			.antMatchers("/employees/create").hasAuthority("ADMIN")
 			.antMatchers("/permissions/**").hasAuthority("ADMIN")
 			.antMatchers("/role-permission/**").hasAnyAuthority("ADMIN")
 			

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brycen.hrm.model.employee.Employee;
 import com.brycen.hrm.model.request.CreateEmployeeRequest;
+import com.brycen.hrm.model.request.EmployeeParamRequest;
 import com.brycen.hrm.model.request.EmployeeRequest;
 import com.brycen.hrm.model.response.EmployeeResponse;
 import com.brycen.hrm.service.employee.EmployeeService;

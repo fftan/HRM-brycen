@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.brycen.hrm.model.employee.Employee;
 import com.brycen.hrm.model.request.CreateEmployeeRequest;
+import com.brycen.hrm.model.request.EmployeeParamRequest;
 import com.brycen.hrm.model.request.EmployeeRequest;
 
 public interface EmployeeService {
